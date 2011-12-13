@@ -1,0 +1,3 @@
+:vsplit <filename>
+:only		close all other window
+ctrl+w ctrl+w	toggle different splits

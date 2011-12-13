@@ -1,0 +1,4 @@
+z=	open recommendations list
+zg	add word to word list
+]s	move to next spelling error
+[s	move to previous spelling error

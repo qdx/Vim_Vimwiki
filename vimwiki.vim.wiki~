@@ -1,0 +1,9 @@
+\ww		opens the main vimwiki
+\ws		choose vimwiki space
+\w\w		open diary of the day
+\w\t		open diary of the day in new split
+shift+enter	enter <br />
+=/-		increase/decrease title level
+:Vimwikitable 	create a table
+\wd		delete a wiki file 
+\wr		rename a wiki file

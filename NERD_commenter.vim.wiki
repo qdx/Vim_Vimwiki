@@ -1,0 +1,8 @@
+\cc		comment the current line
+\cn		comment the selected area
+\cm		comment the selected area with a different behavior
+\c<space>	toggle the comment state of the selected lines as a whole
+\ci		toggle the comment state of the selected lines individually
+\cs		comment the selected lines sexily
+\c$		comment the current from the cursor to the end
+\cu		uncomment the selected lines
