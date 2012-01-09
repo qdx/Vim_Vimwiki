@@ -17,6 +17,7 @@
 	* color_sample_pack.vim
 	* [[NERD_commenter.vim]]
 	* [[grep.vim]]
+	* [[spell check]]
 
 ==Features==
 	* [[Tabs]]
@@ -28,3 +29,4 @@
 	* [[2011/10/14]]
 	* [[2011/10/15]] changed a color scheme
 	* [[2011/10/25]] add grep
+	* 2011/12/20 added plugin FencView.vim
