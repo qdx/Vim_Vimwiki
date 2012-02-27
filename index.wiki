@@ -7,17 +7,20 @@
 
 ==Plugins==
 	* MRU.vim:Most Recently Used files
+		* mapped <F7> to open 
 	* [[NERD_tree.vim]]
+		* mapped <F3> to open
 	* taglist.vim
 	* vimim.vim
 		- vimim.cjk.txt
 		- vimim.gbk.bsddb
 	* [[vimwiki.vim]]
-	* zencoding.vim
+	* [[zencoding.vim]]
 	* color_sample_pack.vim
 	* [[NERD_commenter.vim]]
 	* [[grep.vim]]
 	* [[spell check]]
+		* mapped <F6> to turn on/off
 	* [[FencView]]
 
 ==Features==
@@ -31,3 +34,4 @@
 	* [[2011/10/15]] changed a color scheme
 	* [[2011/10/25]] add grep
 	* [[2011/12/20]] added plugin FencView.vim
+    * [[2012/02/27]] added key map of FencView
