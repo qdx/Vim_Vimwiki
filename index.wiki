@@ -34,4 +34,4 @@
 	* [[2011/10/15]] changed a color scheme
 	* [[2011/10/25]] add grep
 	* [[2011/12/20]] added plugin FencView.vim
-    * [[2012/02/27]] added key map of FencView
+    * [[2012/02/27]] added key map of FencView,and a new wiki space
