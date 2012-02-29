@@ -1,0 +1,564 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>zencoding.vim</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<ul>
+<li>
+<strong>This help doc can be accessed by enter <em>":help ZenCoding"</em></strong>
+
+<li>
+also see: F:/vimwiki/vim/ZenCodingCheatSheet.pdf
+
+</ul>
+<p>
+<strong>zencoding.txt</strong>	ZenCoding for Vim
+</p>
+<blockquote>
+-------------------------------------------------------
+ZenCoding: vim plugins for HTML and CSS hi-speed coding  
+-------------------------------------------------------
+</blockquote>
+
+<p>
+Author: Yasuhiro Matsumoto &lt;mattn.jp@gmail.com&gt;
+WebSite: <a href="http://mattn.kaoriya.net/">http://mattn.kaoriya.net/</a>
+Repository: <a href="http://github.com/mattn/zencoding-vim">http://github.com/mattn/zencoding-vim</a>
+Site: <a href="http://mattn.github.com/zencoding-vim">http://mattn.github.com/zencoding-vim</a>
+License: BSD style license
+</p>
+
+<p>
+==============================================================================
+CONTENTS                                                    <strong>zencoding-contents</strong>
+</p>
+
+<p>
+Introduction           |zencoding-introduction|
+Install                |zencoding-install|
+Tutorial               |zencoding-tutorial|
+  1. Expand Abbreviation            |zencoding-expandabbr|
+  2. Wrap with Abbreviation         |zencoding-wrap-wtih-abbreviation|
+  3. Balance Tag Inward             |zencoding-balance-tag-inward|
+  4. Balance Tag Outward            |zencoding-balance-tag-outward|
+  5. Go to Next Edit Point          |zencoding-goto-next-point| |&lt;C-Y&gt;n|
+  6. Go to Previous Edit Point      |zencoding-goto-previous-point|
+  7. Update &lt;img&gt; Size              |zencoding-update-image-size|
+  8. Merge Lines                    |zencoding-merge-lines|
+  9. Remove Tag                     |zencoding-remove-tag|
+ 10. Split/Join Tag                 |zencoding-split-join-tag|
+ 11. Toggle Comment                 |zencoding-toggle-comment|
+ 12. Make anchor from URL           |zencoding-make-anchor-url|
+ 13. Make quoted text from URL      |zencoding-quoted-text-url|
+Customize             |zencoding-customize|
+  1. Key Mappings                   |zencoding-customize-keymappings|
+  2. Indent Size                    |zencoding-indent-size|
+  3. Define Tag's Behavior          |zencoding-define-tags-behavior|
+  4. Complete Tag                   |zencoding-complete-tag|
+ToDo                  |zencoding-todo|
+</p>
+
+<p>
+==============================================================================
+INTRODUCTION                                  <strong>zencoding-introduction</strong> <strong>zencoding</strong>
+</p>
+
+<p>
+|ZenCoding| is an editor plugin for high-speed HTML, XML, XSL (or any other
+structured code format) coding and editing. The core of this plugin is a
+powerful abbreviation engine which allows you to expand expressions?similar to
+CSS selectors?into HTML code:
+&gt;
+</p>
+<blockquote>
+div#page&gt;div.logo+ul#navigation&gt;li*5&gt;a
+</blockquote>
+<p>
+&lt;
+...can be expanded into:
+&gt;
+</p>
+<blockquote>
+<div id="page">
+<div class="logo"></div>
+&lt;ul id="navigation"&gt;
+&lt;li&gt;&lt;a href=""&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=""&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=""&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=""&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=""&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</div>
+</blockquote>
+<p>
+&lt;
+Read more about current Zen Coding syntax
+  <a href="http://code.google.com/p/zen-coding/wiki/ZenHTMLSelectorsEn">http://code.google.com/p/zen-coding/wiki/ZenHTMLSelectorsEn</a>
+</p>
+
+<p>
+Abbreviation engine has a modular structure which allows you to expand
+abbreviations into different languages. Zen Coding currently supports CSS,
+HTML, XML/XSL and HAML languages via filters.
+</p>
+
+<p>
+==============================================================================
+INSTALL                                                      <strong>zencoding-install</strong>
+</p>
+
+<p>
+Install the distributed files into Vim runtime directory which is usually
+~/.vim/, or $HOME/vimfiles on Windows.
+</p>
+
+<p>
+If you install pathogen that provided from Tim Pope, you should extract the
+file into 'bundle' directory.
+</p>
+
+<p>
+==============================================================================
+TUTORIAL                                                    <strong>zencoding-tutorial</strong>
+</p>
+
+<p>
+If you are seeing this file as :help, then you can't edit this file.
+You should copy this section and create new buffer, paste and write as
+'zencoding-tutor.txt'. Formally, open the file to start tutorial.
+</p>
+
+<p>
+1. Expand Abbreviation                             <strong>zencoding-expandabbr</strong> <strong>&lt;C-Y&gt;,</strong>
+</p>
+
+<p>
+  Type abbreviation as 'div&gt;p#foo$*3&gt;a' and type |&lt;C-Y&gt;,|.
+&gt;
+  <div>
+</p>
+<blockquote>
+&lt;p id="foo1"&gt;
+&lt;a href=""&gt;&lt;/a&gt;
+&lt;/p&gt;
+&lt;p id="foo2"&gt;
+&lt;a href=""&gt;&lt;/a&gt;
+&lt;/p&gt;
+&lt;p id="foo3"&gt;
+&lt;a href=""&gt;&lt;/a&gt;
+&lt;/p&gt;
+</blockquote>
+<p>
+  </div>
+&lt;
+2. Wrap with Abbreviation            <strong>zencoding-wrap-wtih-abbreviation</strong> <strong>v_&lt;C-Y&gt;,</strong>
+</p>
+
+<p>
+  Write as below.
+&gt;
+  test1
+  test2
+  test3
+&lt;
+  Then do visual select(line wize) and type |&lt;C-Y&gt;,|.
+  If you request 'Tag:', then type 'ul&gt;li*'.
+&gt;
+  &lt;ul&gt;
+</p>
+<blockquote>
+&lt;li&gt;test1&lt;/li&gt;
+&lt;li&gt;test2&lt;/li&gt;
+&lt;li&gt;test3&lt;/li&gt;
+</blockquote>
+<p>
+  &lt;/ul&gt;
+&lt;
+  If you type tag as 'blockquote', then you'll see as following.
+&gt;
+  &lt;blockquote&gt;
+</p>
+<blockquote>
+test1
+test2
+test3
+</blockquote>
+<p>
+  &lt;/blockquote&gt;
+&lt;
+3. Balance Tag Inward                      <strong>zencoding-balance-tag-inward</strong> <strong>&lt;C-Y&gt;d</strong>
+</p>
+
+<p>
+  To select inward of ul tag, type |&lt;C-Y&gt;d| in insert mode.
+&gt;
+  &lt;ul&gt;
+</p>
+<ul>
+<li>
+  &lt;li class="list1"&gt;&lt;/li&gt;
+      &lt;li class="list2"&gt;&lt;/li&gt;
+      &lt;li class="list3"&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+
+</ul>
+<p>
+&lt;
+  If cursor is at '*', |&lt;C-Y&gt;d| select from begin of &lt;ul&gt; to end of &lt;/ul&gt;.
+  If cursor is at first of &lt;li&gt;, it select &lt;li class="list1"&gt;&lt;/li&gt;.
+</p>
+
+<p>
+4. Balance Tag Outward                    <strong>zencoding-balance-tag-outward</strong> <strong>&lt;C-Y&gt;D</strong>
+</p>
+
+<p>
+  To select outward of ul tag,  insert mode, type &lt;C-Y&gt;D in insert mode.
+&gt;
+  &lt;ul&gt;
+</p>
+<ul>
+<li>
+&lt;li class="list1"&gt;&lt;/li&gt;
+      &lt;li class="list2"&gt;&lt;/li&gt;
+      &lt;li class="list3"&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+
+</ul>
+<p>
+&lt;
+  If cursor is at '*', |&lt;C-Y&gt;D| select from next letter of &lt;ul&gt; to previous
+  letter of &lt;/ul&gt;.
+  If cursor is at first of &lt;li&gt;, it select &lt;li class="list1"&gt;&lt;/li&gt;.
+</p>
+
+<p>
+5. Go to Next Edit Point                      <strong>zencoding-goto-next-point</strong> <strong>&lt;C-Y&gt;n</strong>
+</p>
+
+<p>
+  To jump next point that need to edit, type |&lt;C-Y&gt;n| in insert mode.
+&gt;
+</p>
+<ul>
+<li>
+<div id="foo" class="">foo</div>
+    <div id="bar" class="bar">&lt;/li>
+
+</ul>
+<p>
+&lt;
+  If cursor is at '*', |&lt;C-Y&gt;n| move a cursor into attribute value of div
+  specified id as 'foo'. And type again |&lt;C-Y&gt;n| move a cursor into inner of 
+  div specified id as 'bar'.
+</p>
+
+<p>
+6. Go to Previous Edit Point              <strong>zencoding-goto-previous-point</strong> <strong>&lt;C-Y&gt;N</strong>
+</p>
+
+<p>
+  To jump previous point that need to edit, type |&lt;C-Y&gt;N| in insert mode.
+&gt;
+  <div id="foo" class="">foo</div>
+  <div id="bar" class="bar">&lt;/li> *
+&lt;
+  If cursor is at '*', |&lt;C-Y&gt;N| move a cursor into div specified id as 'bar'.
+  And type again |&lt;C-Y&gt;N| move a cursor into attribute value of 'foo'.
+</p>
+
+<p>
+7. Update &lt;img&gt; Size                        <strong>zencoding-update-image-size</strong> <strong>&lt;C-Y&gt;i</strong>
+</p>
+
+<p>
+  To expand or update size of image, type |&lt;C-Y&gt;i| on img tag 
+&gt;
+  &lt;img src="foo.png" /&gt;
+&lt;
+  Type '&lt;c-y&gt;i' on img tag 
+&gt;
+  &lt;img src="foo.png" width="32" height="32" /&gt;
+&lt;
+  If you change image, then type it again. it will be following.
+&gt;
+  &lt;img src="foo-48.png" width="32" height="48" /&gt;
+&lt;
+8. Merge Lines                                           <strong>zencoding-merge-lines</strong>
+</p>
+
+<p>
+  To join multi line text like following, type |J|.
+&gt;
+  &lt;ul&gt;
+</p>
+<blockquote>
+&lt;li class="list1"&gt;&lt;/li&gt;
+&lt;li class="list2"&gt;&lt;/li&gt;
+&lt;li class="list3"&gt;&lt;/li&gt;
+</blockquote>
+<p>
+  &lt;/ul&gt;
+&lt;
+  If you select part of line include &lt;li&gt; and type |&lt;C-Y&gt;m|, it will be
+  following.
+&gt;
+  &lt;ul&gt;
+</p>
+<blockquote>
+&lt;li class="list1"&gt;&lt;/li&gt;&lt;li class="list2"&gt;&lt;/li&gt;&lt;li class="list3"&gt;&lt;/li&gt;
+</blockquote>
+<p>
+  &lt;/ul&gt;
+&lt;
+9. Remove Tag                                      <strong>zencoding-remove-tag</strong> <strong>&lt;C-Y&gt;k</strong>
+</p>
+
+<p>
+  To remove tag in the block, type |&lt;C-Y&gt;k|.
+&gt;
+  <div class="foo">
+</p>
+<blockquote>
+&lt;a&gt;cursor is here&lt;/a&gt;
+</blockquote>
+<p>
+  </div>
+&lt;
+  Type |&lt;C-Y&gt;k| in insert mode, then
+&gt;
+  <div class="foo">
+</p>
+      
+<p>
+  </div>
+&lt;
+  And type |&lt;C-Y&gt;k| in there again, then div will be removed.
+</p>
+
+<p>
+10. Split/Join Tag                             <strong>zencoding-split-join-tag</strong> <strong>&lt;C-Y&gt;j</strong>
+</p>
+
+<p>
+  To join block, type |&lt;C-Y&gt;j|.
+&gt;
+  <div class="foo">
+</p>
+<blockquote>
+cursor is here
+</blockquote>
+<p>
+  </div>
+&lt;
+  Type |&lt;C-Y&gt;j| in insert mode. then,
+&gt;
+  <div class="foo"/>
+&lt;
+  And type |&lt;C-Y&gt;j| in there again.
+&gt;
+  <div class="foo">
+  </div>
+&lt;
+11. Toggle Comment                             <strong>zencoding-toggle-comment</strong> <strong>&lt;C-Y&gt;/</strong>
+</p>
+
+<p>
+  Move cursor to block
+&gt;
+  <div>
+</p>
+<blockquote>
+hello world
+</blockquote>
+<p>
+  </div>
+&lt;
+  Type '&lt;c-y&gt;/' in insert mode.
+&gt;
+  &lt;!-- <div>
+</p>
+<blockquote>
+hello world
+</blockquote>
+<p>
+  </div> --&gt;
+&lt;
+  Type '&lt;c-y&gt;/' in there again.
+&gt;
+  <div>
+</p>
+<blockquote>
+hello world
+</blockquote>
+<p>
+  </div>
+&lt;
+12. Make anchor from URL                      <strong>zencoding-make-anchor-url</strong> <strong>&lt;C-Y&gt;a</strong>
+</p>
+
+<p>
+  Move cursor to URL
+&gt;
+  <a href="http://www.google.com/">http://www.google.com/</a>
+&lt;
+  Type |&lt;C-Y&gt;a|
+&gt;
+  &lt;a href="<a href="http://www.google.com/"&gt;Google&lt;/a&gt;">http://www.google.com/"&gt;Google&lt;/a&gt;</a>
+&lt;
+13. Make quoted text from URL                 <strong>zencoding-quoted-text-url</strong> <strong>&lt;C-Y&gt;A</strong>
+</p>
+
+<p>
+  Move cursor to URL
+&gt;
+  <a href="http://github.com/">http://github.com/</a>
+&lt;
+  Type |&lt;C-Y&gt;A|
+&gt;
+  &lt;blockquote class="quote"&gt;
+</p>
+<blockquote>
+&lt;a href="<a href="http://github.com/"&gt;Secure">http://github.com/"&gt;Secure</a> source code hosting and collaborative development - GitHub&lt;/a&gt;<br />
+&lt;p&gt;How does it work? Get up and running in seconds by forking a project, pushing an existing repository...&lt;/p&gt;
+&lt;cite&gt;<a href="http://github.com/&lt;/cite&gt;">http://github.com/&lt;/cite&gt;</a>
+</blockquote>
+<p>
+  &lt;/blockquote&gt;
+&lt;
+==============================================================================
+CUSTOMIZE                                                  <strong>zencoding-customize</strong>
+</p>
+
+<p>
+1. Key Mapping                                 <strong>zencoding-customize-keymappings</strong>
+</p>
+
+<p>
+  To specify leading key for expanding or balance tag, or for all,
+  Add this line in your vimrc: &gt;
+&gt;
+  let g:user_zen_leader_key = '&lt;c-y&gt;'
+&lt;
+  Or if you prefer to map for each actions, then you set each variables.
+</p>
+<blockquote>
+'user_zen_expandabbr_key'
+'user_zen_expandword_key'
+'user_zen_balancetaginward_key'
+'user_zen_balancetagoutward_key'
+'user_zen_next_key'
+'user_zen_prev_key'
+'user_zen_imagesize_key'
+'user_zen_togglecomment_key'
+'user_zen_splitjointag_key'
+'user_zen_removetag_key'
+'user_zen_anchorizeurl_key'
+'user_zen_anchorizesummary_key'
+</blockquote>
+
+<p>
+2. Indent Size                                           <strong>zencoding-indent-size</strong>
+</p>
+
+<p>
+  To change indent size of html, add this code in your vimrc.
+&gt;
+  let g:user_zen_settings = {
+  \  'html' : {
+  \    'indentation' : ' '
+  \  },
+  \}
+&lt;
+  If you prefer to change global indent size then add this.
+&gt;
+  let g:user_zen_settings = {
+  \  'indentation' : ' '
+  \}
+&lt;
+3. Define Tag's Behavior                        <strong>zencoding-define-tags-behavior</strong>
+</p>
+
+<p>
+  zencoding.vim can change behavior of expanding abbreviation for each
+  filetypes as |Dictionary|. for details, see official site of zencoding.
+  for example, vimmer can add following.
+&gt;
+  let g:user_zen_settings = {
+  \  'lang' : 'ja',
+  \  'html' : {
+  \    'filters' : 'html',
+  \    'indentation' : ' '
+  \  },
+  \  'perl' : {
+  \    'indentation' : '  ',
+  \    'aliases' : {
+  \      'req' : "require '|'"
+  \    },
+  \    'snippets' : {
+  \      'use' : "use strict\nuse warnings\n\n",
+  \      'w' : "warn \"${cursor}\";",
+  \    },
+  \  },
+  \  'php' : {
+  \    'extends' : 'html',
+  \    'filters' : 'html,c',
+  \  },
+  \  'css' : {
+  \    'filters' : 'fc',
+  \  },
+  \  'javascript' : {
+  \    'snippets' : {
+  \      'jq' : "$(function() {\n\t${cursor}${child}\n});",
+  \      'jq:each' : "$.each(arr, function(index, item)\n\t${child}\n});",
+  \      'fn' : "(function() {\n\t${cursor}\n})();",
+  \      'tm' : "setTimeout(function() {\n\t${cursor}\n}, 100);",
+  \    },
+  \  },
+  \ 'java' : {
+  \  'indentation' : '    ',
+  \  'snippets' : {
+  \   'main': "public static void main(String[] args) {\n\t|\n}",
+  \   'println': "System.out.println(\"|\");",
+  \   'class': "public class | {\n}\n",
+  \  },
+  \ },
+  \}
+&lt;
+4. Complete Tag                                         <strong>zencoding-complete-tag</strong>
+</p>
+
+<p>
+  If you want to complete tags using |omnifunc| then add this.
+&gt;
+  let g:use_zen_complete_tag = 1
+&lt;
+==============================================================================
+TODO                                                            <strong>zencoding-todo</strong>
+</p>
+<ul>
+<li>
+wrapping inline selected.
+
+<li>
+more documents.
+
+<li>
+more contributor.
+
+<li>
+more time to improve zencodig.vim.
+
+</ul>
+
+<p>
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:noet:fen:fdl=0:
+</p>
+
+</body>
+</html>

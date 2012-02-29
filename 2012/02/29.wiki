@@ -1,0 +1,3 @@
+little change, no need to backup the whole file. Added:
+set tabstop=4		" Force tabs to be displayed/expanded to 4 spaces
+set shiftwidth=4	" When auto-indenting, indent by this much.

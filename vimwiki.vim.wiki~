@@ -7,3 +7,5 @@ shift+enter	enter <br />
 :Vimwikitable 	create a table
 \wd		delete a wiki file 
 \wr		rename a wiki file
+ALT + <ArrowR>	move a coloum to right 
+
