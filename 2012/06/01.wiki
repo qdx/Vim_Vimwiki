@@ -1,0 +1,274 @@
+" Maintainer: DeXin Qi<qdxzzz@gmail.com>
+" Last change:	2011 Oct 14
+"
+" To use it, copy it to
+"     for Unix and OS/2:  ~/.vimrc
+"	      for Amiga:  s:.vimrc
+"  for MS-DOS and Win32:  $VIM\_vimrc
+"	    for OpenVMS:  sys$login:.vimrc
+
+" @from example vimrc file
+" When started as "evim", evim.vim will already have done these settings.
+if v:progname =~? "evim"
+  finish
+endif
+
+" @from example vimrc file
+" Use Vim settings, rather than Vi settings (much better!).
+" This must be first, because it changes other options as a side effect.
+set nocompatible
+syntax on
+
+" @from example vimrc file
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+
+" set Encoding
+set encoding=utf-8
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+set langmenu=zh_CN.UTF-8
+language message zh_CN.UTF-8
+
+" 解决中文菜单乱码问题
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
+
+" @from example vimrc file
+if has("vms")
+  set nobackup		" do not keep a backup file, use versions instead
+else
+  set backup		" keep a backup file
+endif
+set history=50		" keep 50 lines of command line history
+
+" set the enviornment variable
+if has("win32")
+	let $VIMFILES = $VIM.'/vimfiles'
+else
+	let $VIMFILES = $HOME.'/.vim'
+endif
+
+
+
+"+++Universal settings++++
+set aw
+set fdm=indent		" zip code by indent
+set foldcolumn=4	" show fold area at left
+set guifont=Consolas:h11:cANSI	"set font
+set guioptions-=T	" += will show GUI tool bar when -= hide them
+set guioptions+=m	" == will show GUI menu bar, when -= hide them
+set incsearch		" do incremental searching
+set nu			" show line number
+set ruler		" show the cursor position all the time
+set showcmd		" display incomplete commands
+" about text formatting
+set autoindent		" auto indent 
+set smartindent		" smart indent
+set cindent		" c language like indent
+set smarttab		" only TAB
+set tabstop=4		" Force tabs to be displayed/expanded to 4 spaces
+set shiftwidth=4	" When auto-indenting, indent by this much.
+set textwidth=80	" auto line feed with 80 chars one line
+
+set guioptions+=b	" temp
+" set nowrap
+
+"=========All Key Maps===========
+" mapping most recently used files list with <F2>
+nmap <F2> :MRU<CR>
+" mapping NERD_tree
+nmap <F3> <ESC>:NERDTreeToggle<RETURN>
+" cleans the search highlights
+nmap <silent><F4> :set invhlsearch<CR>
+" mapping fast entering current date
+" here 'de' = 'de.bat' is a self written bat file
+map <silent><F5> !!de<CR>
+" mapping fast entering current date with time
+map <S-F5> !!ti<CR>
+" toggle spelling check [i do not understand how it works]
+nmap <silent><f6> :set spell!<cr><bar>:echo "spell check: " . strpart("offon", 3 * &spell, 3)<cr>
+" toggle most recently used files
+map <F7> :MRU<CR>
+" <F8> cannot be mapped, I don't know why
+" Map FencView with
+map <F9> :FencView<CR>
+" mapping editing vimrc with F12
+map <F12> :tabnew ~/_vimrc<CR>
+
+" 持久撤销 Persistent Undo
+set undofile
+set undodir=F:/Program/Vim/pluginNeed/\_undodir
+set undolevels=1000	"maximum changes can be undone
+
+" grep settings
+:let Grep_Path = 'C:\Program Files\GnuWin32\bin\grep.exe'
+:let Fgrep_Path = 'C:\Program Files\GnuWin32\bin\fgrep.exe'
+:let Egrep_Path = 'C:\Program Files\GnuWin32\bin\egrep.exe'
+:let Agrep_Path = 'C:\Program Files\GnuWin32\bin\agrep.exe'
+:let Grep_Find_Path = 'C:\Program Files\GnuWin32\bin\find.exe'
+:let Grep_Xargs_Path = 'C:\Program Files\GnuWin32\bin\xargs.exe'
+
+
+
+" setting the MRU file location
+let MRU_File = 'F:/Program/Vim/pluginNeed/_MRUfile/MRU_Record_file'
+
+" set the number of spelling recommendations
+" Tips: z=	open recommendations list
+" 	zg	add word to word list
+" 	]s	move to next spelling error
+" 	[s	move to previous spelling error
+ set sps=best,5
+
+" vimwiki
+" tips: \ww	opens the main vimwiki
+" 	\ws	choose vimwiki space
+" 	\w\w	open diary of the day
+" 	\w\t	open diary of the day in new split
+let g:vimwiki_use_mouse=1
+let g:vimwiki_list=[{
+	\ 'path': 'F:/vimwiki/main/',
+	\ 'path_html': 'F:/vimwiki/main/html',
+	\ 'diary_link_count': 1},
+	\{'path': 'F:/vimwiki/vim/',
+	\ 'path_html': 'F:/vimwiki/vim/html'},
+	\{'path': 'F:/vimwiki/music',
+	\ 'path_html': 'F:/vimwiki/music/html'},
+	\{'path': 'F:/vimwiki/programmer',
+	\ 'path_html': 'F:/vimwiki/programmer/html'},
+	\{'path': 'F:/vimwiki/bicycle',
+	\ 'path_html': 'F:/vimwiki/bicycle/html'},
+	\{'path': 'F:/vimwiki/Facemeet',
+	\ 'path_html': 'F:/vimwiki/Facemeet/html'},
+	\{'path': 'F:/vimwiki/graduatePaper',
+	\ 'path_html': 'F:/vimwiki/graduatePaper/html'}]
+
+" 取消驼峰自动为维基词条
+let g:vimwiki_camel_case = 0
+
+
+"关于tags:
+set tags=tags;
+set autochdir
+filetype plugin on
+filetype on
+au BufEnter *.txt setlocal ft=txt
+
+"色彩主题:
+"colorscheme koehler " set the color scheme
+colorscheme BlackSea" set the color scheme
+
+"FencView:
+"打开文件时自动识别文件的编码
+let g:fencview_autodetect = 0
+"在:FencView命令的状态栏显示编码信息等信息
+set statusline=[%n]%<%f%y%h%m[%{&fenc!=''?&fenc:&enc}:%{&ff}]%r%=[%b\ 0x%B]\ %l\ of\ %L,%c%V\ Page\ %N\ %P
+
+"VimIM
+" Tips: ctrl+6	change selecting style
+" 	gi	input with vimim
+" 	ctrl+xx	change input method
+" 	ctrl+\	toggle input method on/off
+"forbid cloud input
+let g:vimim_cloud=-1
+
+"@ The following are from exampe vimrc file
+" For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
+" let &guioptions = substitute(&guioptions, "t", "", "g")
+
+" Don't use Ex mode, use Q for formatting
+map Q gq
+
+" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
+" so that you can undo CTRL-U after inserting a line break.
+inoremap <C-U> <C-G>u<C-U>
+
+" In many terminal emulators the mouse works just fine, thus enable it.
+if has('mouse')
+  set mouse=a
+endif
+
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if &t_Co > 2 || has("gui_running")
+  syntax on
+  set hlsearch
+endif
+
+" Only do this part when compiled with support for autocommands.
+if has("autocmd")
+
+  " Enable file type detection.
+  " Use the default filetype settings, so that mail gets 'tw' set to 72,
+  " 'cindent' is on in C files, etc.
+  " Also load indent files, to automatically do language-dependent indenting.
+  filetype plugin indent on
+
+  " Put these in an autocmd group, so that we can delete them easily.
+  augroup vimrcEx
+  au!
+
+  " For all text files set 'textwidth' to 78 characters.
+  autocmd FileType text setlocal textwidth=78
+
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it when the position is invalid or when inside an event handler
+  " (happens when dropping a file on gvim).
+  " Also don't do it when the mark is in the first line, that is the default
+  " position when opening a file.
+  autocmd BufReadPost *
+    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif
+
+  augroup END
+
+else
+
+  set autoindent		" always set autoindenting on
+
+endif " has("autocmd")
+
+" Convenient command to see the difference between the current buffer and the
+" file it was loaded from, thus the changes you made.
+" Only define it when not defined already.
+if !exists(":DiffOrig")
+  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+		  \ | wincmd p | diffthis
+endif
+
+"""""""""""""""""""""""""""""""Latex-Vim-Suite"""""""""""""""""""""""""""""""
+" Tips: since I haven't install Latex-vim-Suite yet, the setting are commented
+" REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
+"""filetype plugin on
+
+" IMPORTANT: win32 users will need to have 'shellslash' set so that latex
+" can be called correctly.
+"""set shellslash
+
+" IMPORTANT: grep will sometimes skip displaying the file name if you
+" search in a singe file. This will confuse Latex-Suite. Set your grep
+" program to always generate a file-name.
+"""set grepprg=grep\ -nH\ $*
+
+" OPTIONAL: This enables automatic indentation as you type.
+"""filetype indent on
+
+" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
+" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
+" The following changes the default filetype back to 'tex':
+"""let g:tex_flavor='latex'
+"""""""""""""""""""""""""""""""Latex-Vim-Suite"""""""""""""""""""""""""""""""
+
+"old version content
+"窗口管理
+"let Tlist_Show_One_File=1
+"let Tlist_Exit_OnlyWindow=1
+"let g:winManagerWindowLayout='FileExplorer|TagList'
+"nmap mw :WMToggle<cr>
+
+"多文件编辑
+"let g:miniBufExplMapCTabSwitchBufs=1
+"let g:miniBufExplMapWindowsNavVim=1
+"let g:miniBufExplMapwindowNavArrows=1

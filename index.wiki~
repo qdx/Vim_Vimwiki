@@ -1,4 +1,4 @@
-=This wiki is all about Vim=
+==This wiki is all about Vim==
 ==Introduction==
 	This is where I record my using experience of vim.
 	The following is my vim environment:
@@ -27,6 +27,9 @@
 	* [[Tabs]]
 	* [[Split]]
 	* [[vimdiff]]
+	* [[tab=spaces]]
+	* [[Formating]]
+
 
 ==Vimrc==
 ===History===
@@ -36,3 +39,5 @@
 	* [[2011/12/20]] added plugin FencView.vim
     * [[2012/02/27]] added key map of FencView,and a new wiki space
 	* [[2012/02/29]] modify the represented spaces numbers by tab
+	* 2012/03/05 added: set textwidth=80
+	* [[2012/06/01]] resolve the gibberish problem of the chinese menu

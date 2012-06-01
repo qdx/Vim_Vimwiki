@@ -1,3 +1,22 @@
+= miscellaneous =
 :vsplit <filename>
-:only		close all other window
+
+= moving between split windows =
 ctrl+w ctrl+w	toggle different splits
+CTRL-W h	move to the window on the left
+CTRL-W j	move to the window below
+CTRL-W k	move to the window above
+CTRL-W l	move to the window on the right
+CTRL-W t	move to the TOP window
+CTRL-W b	move to the BOTTOM window
+CTRL-W =		make all windows equal height
+CTRL-W ^		split window and edit alternate file
+CTRL-W n  or  :new	create new empty window
+CTRL-W q  or  :q[uit]	quit editing and close window
+CTRL-W o  or  :on[ly]	make current window only one on the
+
+= move the split windows =
+CTRL-W J K L ;	move the splited window up down left right, use uppercase Letter!
+
+= change the size of split windows =
+{num of lines}CTRL-W +/-	change the size of the window
