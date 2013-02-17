@@ -1,0 +1,26 @@
+reference:
+"""
+我现在使用xelatex命令进行文档的编译，利用evince浏览生成的pdf文档。可以通过修改
+~/.vim/ftplugin/latex-suite/texrc完成这些操作。
+第88到92行，我进行了如下修改
+88 if has('macunix')
+89 	 TexLet g:Tex_DefaultTargetFormat = 'pdf'
+90 else
+91	 TexLet g:Tex_DefaultTargetFormat = 'pdf'
+92 endif
+就是让tex总是被编译成pdf
+第117行修改为
+114 " ways to generate pdf files. there are soo many...
+115 " NOTE: pdflatex generates the same output as latex. therefore quickfix is
+116 "       possible.
+117 TexLet g:Tex_CompileRule_pdf = 'xelatex -interaction=nonstopmode $*'
+使用xelatex完成 tex -> pdf 的编译
+修改147行：
+144 elseif has('macunix')
+145 	 " Let the system pick.  If you want, you can override the choice here.
+146	 TexLet g:Tex_ViewRule_ps = ''
+147	 TexLet g:Tex_ViewRule_pdf = 'evince'
+指定用evince程序打开pdf文档。
+"""
+from
+http://blog.csdn.net/guanggy/article/details/4790111

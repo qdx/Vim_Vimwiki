@@ -9,4 +9,4 @@ shift+enter	enter <br />
 \wr		rename a wiki file
 ALT + <ArrowR>	move a coloum to right 
 :VimwikiAll2HTML	create html from wiki
-
+\w\i	generate diary index

@@ -3,7 +3,7 @@
 	This is where I record my using experience of vim.
 	The following is my vim environment:
 	* gvim 7.3.46 under windows7 with GUI
-	* path of gvim: "F:\Program\Vim\"
+	* path of gvim: "G:\Program\Vim\"
 
 ==Plugins==
 	* MRU.vim:Most Recently Used files
@@ -11,9 +11,6 @@
 	* [[NERD_tree.vim]]
 		* mapped <F3> to open
 	* taglist.vim
-	* vimim.vim
-		- vimim.cjk.txt
-		- vimim.gbk.bsddb
 	* [[vimwiki.vim]]
 	* [[zencoding.vim]]
 	* color_sample_pack.vim
@@ -22,6 +19,9 @@
 	* [[spell check]]
 		* mapped <F6> to turn on/off
 	* [[FencView]]
+	* [[Gundo]]
+	* [[vimlatex]]
+	* [[conqueShell]]
 
 ==Features==
 	* [[Tabs]]
@@ -29,6 +29,7 @@
 	* [[vimdiff]]
 	* [[tab=spaces]]
 	* [[Formating]]
+	* [[Hit Enter]]
 
 
 ==Vimrc==
@@ -41,3 +42,5 @@
 	* [[2012/02/29]] modify the represented spaces numbers by tab
 	* 2012/03/05 added: set textwidth=80
 	* [[2012/06/01]] resolve the gibberish problem of the chinese menu
+	* [[2012/07/04]] vimwiki 2.0
+	* 

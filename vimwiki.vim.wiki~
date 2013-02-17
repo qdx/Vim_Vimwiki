@@ -8,4 +8,5 @@ shift+enter	enter <br />
 \wd		delete a wiki file 
 \wr		rename a wiki file
 ALT + <ArrowR>	move a coloum to right 
+:VimwikiAll2HTML	create html from wiki
 

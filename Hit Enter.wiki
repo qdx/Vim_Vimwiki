@@ -1,0 +1,1 @@
+to avoid hit enter to continue inside vim, add one extra <CR> after the command

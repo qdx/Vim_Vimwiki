@@ -1,5 +1,6 @@
 = miscellaneous =
 :vsplit <filename>
+:vne	" open a new file in vs
 
 = moving between split windows =
 ctrl+w ctrl+w	toggle different splits
